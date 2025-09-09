@@ -9,4 +9,8 @@ services:
     envVars:
       - key: PORT
         value: 8000
-      # Fill MONGO_URI / OPENROUTER_API_KEY in Render Dashboard (more secure)
+      # Put sensitive values in the dashboard instead of here:
+      # - key: MONGO_URI
+      #   value: your-connection-string
+      # - key: OPENROUTER_API_KEY
+      #   value: sk-or-xxxxxxxx
