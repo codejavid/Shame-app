@@ -7,7 +7,19 @@ import aiRoutes from "./routes/aiRoutes.js";
 const app = express();
 
 // Middleware
-app.use(cors({ origin: "http://localhost:5173" }));
+const allowed = [
+  "http://localhost:5173",
+  "https://shameaiapp.netlify.app/",
+  "https://your-custom-domain.com"
+];
+
+app.use(cors({
+  origin: (origin, cb) => {
+    if (!origin || allowed.includes(origin)) return cb(null, true);
+    cb(new Error("Not allowed by CORS"));
+  }
+}));
+
 app.use(express.json());
 
 // Routes
