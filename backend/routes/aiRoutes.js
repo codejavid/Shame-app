@@ -1,7 +1,7 @@
-// routes/aiRoutes.js
-import express from "express";
+import { Router } from "express";
 import { suggestAI } from "../controllers/aiController.js";
-const router = express.Router();
+
+const router = Router();
 
 router.post("/suggest", suggestAI);
 

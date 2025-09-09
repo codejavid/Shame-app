@@ -1,4 +1,3 @@
-// app.js
 import express from "express";
 import cors from "cors";
 import shameRoutes from "./routes/shameRoutes.js";
@@ -6,30 +5,28 @@ import aiRoutes from "./routes/aiRoutes.js";
 
 const app = express();
 
-/* ---------- CORS (fixed) ---------- */
+/* ---------- CORS ---------- */
 const allowed = new Set([
   "http://localhost:5173",
-  "https://shameaiapp.netlify.app", // <-- no trailing slash
+  "https://shameaiapp.netlify.app",
   "https://your-custom-domain.com",
 ]);
 
 const corsOptions = {
   origin: (origin, cb) => {
-    // allow server-to-server / curl / health checks (no Origin header)
-    if (!origin) return cb(null, true);
+    if (!origin) return cb(null, true);          // server-to-server, curl, health checks
     if (allowed.has(origin)) return cb(null, true);
-    // silently deny (no error) so preflight just doesn't get ACAO
-    return cb(null, false);
+    return cb(null, false);                       // silent deny so preflight doesn't error
   },
-  methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: false, // set true only if you actually use cookies/auth
+  methods: ["GET","HEAD","PUT","PATCH","POST","DELETE","OPTIONS"],
+  allowedHeaders: ["Content-Type","Authorization"],
+  credentials: false,
   optionsSuccessStatus: 204,
 };
+
 app.use(cors(corsOptions));
-// handle preflight globally
 app.options("*", cors(corsOptions));
-/* ---------------------------------- */
+/* -------------------------- */
 
 app.use(express.json());
 
@@ -38,7 +35,7 @@ app.use("/api/shame", shameRoutes);
 app.use("/api/ai", aiRoutes);
 
 // Root
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
   res.send("ShameApp API is running...");
 });
 
