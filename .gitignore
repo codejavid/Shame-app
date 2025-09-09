@@ -1,0 +1,13 @@
+# common
+.DS_Store
+node_modules
+npm-debug.log*
+pnpm-lock.yaml
+yarn.lock
+
+# frontend
+frontend/dist
+frontend/.env
+
+# backend
+backend/.env

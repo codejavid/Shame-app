@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: shameapp-backend
+    env: node
+    rootDir: backend
+    buildCommand: "npm install"
+    startCommand: "node server.js"
+    plan: free
+    envVars:
+      - key: PORT
+        value: 8000
+      # Fill MONGO_URI / OPENROUTER_API_KEY in Render Dashboard (more secure)

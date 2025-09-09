@@ -1,0 +1,10 @@
+[build]
+  base = "frontend"
+  command = "npm ci && npm run build"
+  publish = "dist"
+
+# Optional: use the same repo for preview deploys too
+[build.environment]
+  NODE_VERSION = "20"
+
+# SPA routing already handled by public/_redirects
